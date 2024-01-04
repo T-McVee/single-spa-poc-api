@@ -1,19 +1,18 @@
 /* eslint-disable no-console */
 // Anything exported from this file is importable by other in-browser modules.
 
-import { from, Observable, Subject } from 'rxjs';
+// RxJs Subjects are used to create an observable that can be subscribed to from other modules. Allows subscribed modules to update when the state changes.
+import { Subject } from 'rxjs';
 
-
-
-
+// Track if the react app 2 parcel is mounted or not
 let isMounted = false;
-const isParcelMountedSubject = new Subject(isMounted);
+const isParcelMountedSubject = new Subject(isMounted); 
 
 export function showParcel() {
   
   function toggleIsMounted() {
     isMounted = !isMounted;
-    isParcelMountedSubject.next(isMounted)
+    isParcelMountedSubject.next(isMounted) // push the new state to all subscribers
   }
 
   function getCurrentState() {
@@ -25,6 +24,7 @@ export function showParcel() {
   }
 }
 
+// Counter 
 let count = 0;
 const counterSubject = new Subject(count);
 
